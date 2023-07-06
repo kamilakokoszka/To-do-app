@@ -73,3 +73,10 @@ class TaskCreateView(generic.CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(TaskCreateView, self).form_valid(form)
+
+
+class TaskDeleteView(generic.DeleteView):
+    template_name = 'task_confirm_delete.html'
+    model = Task
+    context_object_name = 'task'
+    success_url = '/tasks/'
