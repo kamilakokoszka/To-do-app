@@ -1,12 +1,9 @@
-from django.contrib.auth import login
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.contrib import messages
-from django.views import generic, View
-from django.views.generic import FormView
-
+from django.views.generic import FormView, CreateView, DeleteView, ListView, UpdateView
 from base.models import Task
-from base.forms import TaskForm
+from django.contrib import messages
+from django.contrib.auth import login
 from django.contrib.auth.views import LoginView, LogoutView
 from base.forms import UserCreationForm
 
@@ -44,7 +41,7 @@ class UserLogoutView(LogoutView):
     next_page = '/tasks/'
 
 
-class TaskListView(generic.ListView):
+class TaskListView(ListView):
     model = Task
     context_object_name = 'task_list'
     template_name = 'task_list.html'
@@ -56,7 +53,7 @@ class TaskListView(generic.ListView):
         return context
 
 
-class TaskUpdateView(generic.UpdateView):
+class TaskUpdateView(UpdateView):
     template_name = 'task_update.html'
     model = Task
     fields = ['title', 'description', 'complete']
@@ -64,7 +61,7 @@ class TaskUpdateView(generic.UpdateView):
     success_url = '/tasks/'
 
 
-class TaskCreateView(generic.CreateView):
+class TaskCreateView(CreateView):
     template_name = 'task_form.html'
     model = Task
     fields = ['title', 'description']
@@ -75,7 +72,7 @@ class TaskCreateView(generic.CreateView):
         return super(TaskCreateView, self).form_valid(form)
 
 
-class TaskDeleteView(generic.DeleteView):
+class TaskDeleteView(DeleteView):
     template_name = 'task_confirm_delete.html'
     model = Task
     context_object_name = 'task'

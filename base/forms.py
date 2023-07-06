@@ -1,8 +1,8 @@
 from django import forms
 from django.forms import ModelForm
-from base.models import Task
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from base.models import Task
 
 
 class LoginForm(forms.Form):

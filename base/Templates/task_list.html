@@ -8,8 +8,6 @@
         <a href="{% url 'delete-task' pk=task.id %}">Delete</a>
     <p>{{ task.description }}</p>
     </li>
-
-
     {% empty %}
     <h3>No tasks yet</h3>
     {% endfor %}
