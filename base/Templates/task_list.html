@@ -1,0 +1,17 @@
+{% extends 'base_page.html' %}
+
+{%  block content %}
+<h1>Tasks</h1>
+<ul>
+    {% for task in task_list %}
+    <li>{{ task.title }}<a href="{% url 'edit-task' pk=product.id %}">Edit</a>
+    <p>{{ task.description }}</p>
+    </li>
+
+
+    {% empty %}
+    <h2>No tasks yet</h2>
+    {% endfor %}
+</ul>
+    <a href="">Add task</a>
+{%  endblock %}
