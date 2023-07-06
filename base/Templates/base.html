@@ -5,7 +5,17 @@
         <title>Todo app</title>
     </head>
     <body>
+
+    {% if request.user.is_authenticated %}
+        <p>{{ request.user }} ---- <a href="{% url 'logout' %}">Logout</a></p>
+        <hr>
         {% block content %}
         {% endblock %}
+    {% else %}
+        <p>You have to be logged in to use this application.</p>
+        <a href="{% url 'login' %}">Login</a>
+        <p>Don't have an account?
+        <a href="{% url 'register' %}">Register</a>
+    {% endif %}
     </body>
 </html>

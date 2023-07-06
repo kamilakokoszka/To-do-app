@@ -19,8 +19,11 @@ from base.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', UserLoginView.as_view(), name='login'),
+    path('logout/', UserLogoutView.as_view(), name='logout'),
+    path('register/', RegisterUserView.as_view(), name='register'),
     path('tasks/', TaskListView.as_view(), name='task-list'),
     path('task/<int:pk>/', TaskUpdateView.as_view(), name='update-task'),
-    path('add_task/', TaskCreateView.as_view(), name='add-task')
+    path('add_task/', TaskCreateView.as_view(), name='add-task'),
     ]
 
