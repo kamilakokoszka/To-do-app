@@ -3,19 +3,30 @@
     <head>
         <meta charset="UTF-8">
         <title>Todo app</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
-
-    {% if request.user.is_authenticated %}
-        <p>{{ request.user }} ---- <a href="{% url 'logout' %}">Logout</a></p>
-        <hr>
-        {% block content %}
-        {% endblock %}
+        <nav class="navbar navbar-dark bg-dark">
+            {% if request.user.is_authenticated %}
+            <div class="order-0 text-light font-weight-bold">
+                {{ request.user }}
+            </div>
+            <div class="order-1 nav-item active">
+                <a href="{% url 'logout' %}" class="text-secondary">Logout</a>
+            </div>
+            <hr>
+        </nav>
+        <div class="card-body mx-auto margin card bg-light mb-3 mt-5" style="max-width: 40rem;">
+            {% block content %}
+            {% endblock %}
+        </div>
     {% else %}
-        <p>You have to be logged in to use this application.</p>
-        <a href="{% url 'login' %}">Login</a>
-        <p>Don't have an account?
-        <a href="{% url 'register' %}">Register</a>
+        <div class="card-body mx-auto margin card bg-light mb-3 mt-5 ">
+            <p>You have to be logged in to use this application.</p>
+            <a href="{% url 'login' %}">Login</a>
+            <p>Don't have an account?
+            <a href="{% url 'register' %}">Register</a>
+        </div>
     {% endif %}
     </body>
 </html>
