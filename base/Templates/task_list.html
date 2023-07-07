@@ -1,16 +1,35 @@
 {% extends 'base.html' %}
 
 {%  block content %}
-<h1>Tasks</h1>
-<ul>
-    {% for task in task_list %}
-    <li>{{ task.title }}<a href="{% url 'update-task' pk=task.id %}">Edit</a>
-        <a href="{% url 'delete-task' pk=task.id %}">Delete</a>
-    <p>{{ task.description }}</p>
-    </li>
-    {% empty %}
-    <h3>No tasks yet</h3>
-    {% endfor %}
-</ul>
-    <a href="{% url 'add-task' %}">Add task</a>
-{%  endblock %}
+    <table class="table">
+        <thead>
+            <tr class="d-flex">
+                <h1 class="text-center">Tasks</h1>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="d-flex">
+                {% for task in task_list %}
+                    <li class="list-group-item">
+                    {% if not task.complete %}
+                        <p class="font-weight-bold">{{ task.title }}
+                        <a class="btn btn-secondary btn-sm active float-right" role="button" aria-pressed="true" href="{% url 'update-task' pk=task.id %}" >Edit</a>
+                        <a class="btn btn-secondary btn-sm active float-right mr-2" role="button" aria-pressed="true" href="{% url 'delete-task' pk=task.id %}">Delete</a>
+                        </p>
+                        <p>{{ task.description }}</p>
+                    {% else %}
+                        <p class="font-weight-bold text-secondary"><del>{{ task.title }}</del>
+                        <a class="btn btn-secondary btn-sm active float-right" role="button" aria-pressed="true" href="{% url 'update-task' pk=task.id %}" >Edit</a>
+                        <a class="btn btn-secondary btn-sm active float-right mr-2" role="button" aria-pressed="true" href="{% url 'delete-task' pk=task.id %}">Delete</a>
+                        </p>
+                        <p class="text-secondary"><del>{{ task.description }}</del></p>
+                    {% endif %}
+                    </li>
+            </tr>
+                {% empty %}
+                    <h3>No tasks yet</h3>
+                {% endfor %}
+        </tbody>
+    </table>
+        <a href="{% url 'add-task' %}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Add task</a>
+{% endblock %}
