@@ -48,9 +48,13 @@ class TaskListView(ListView):
     fields = ['title', 'description', 'complete']
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['task_list'].filter(user=self.request.user)
-        return context
+        user = self.request.user
+        if user.is_authenticated:
+            context = super().get_context_data(**kwargs)
+            context['task_list'].filter(user=self.request.user)
+            return context
+        else:
+            pass
 
 
 class TaskUpdateView(UpdateView):

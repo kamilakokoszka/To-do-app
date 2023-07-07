@@ -5,10 +5,12 @@
         <title>Todo app</title>
     </head>
     <body>
-    <form method="post">
-        {%  csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Login">
-    </form>
+        <form method="post">
+            {%  csrf_token %}
+            <table>
+            {{ form.as_table }}
+            </table>
+            <input class="button btn-secondary" type="submit" value="Login">
+        </form>
     </body>
 </html>
